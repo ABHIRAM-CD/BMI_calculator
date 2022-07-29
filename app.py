@@ -2,23 +2,28 @@ import streamlit as st
 
 outside_expander_area = st.container()
 
-with st.expander('Show the code', expanded=True):
+with st.expander('Show the code', expanded=False):
     with st.echo():
         state = st.session_state
         if 'WEIGHT' not in state:
             state.WEIGHT = 52.0
         if 'HEIGHT' not in state:
             state.HEIGHT = 1.54
+        if 'NAME' not in state:
+            state.NAME = 'Your name'
 
         def _set_values_cb():
             state.WEIGHT = state['weight']
             state.HEIGHT = state['height']
+            state.NAME = state['name']
+            
 
         with outside_expander_area:
             c1, c2 = st.columns([1,1])
             with c1:
                 guage = st.empty()
             with c2:
+                state.NAME = st.input('Enter your name (m)', value=state.NAME, key='name')
                 state.WEIGHT = st.number_input('Enter weight (kg)', min_value=50.0, max_value=150.0, value=state.WEIGHT, step=0.5, on_change=_set_values_cb, key='weight')
                 state.HEIGHT = st.number_input('Enter height (m)', min_value=1.0, max_value=2.5, value=state.HEIGHT, step=0.1, on_change=_set_values_cb, key='height')
 
