@@ -10,7 +10,7 @@ with st.expander('Show the code', expanded=False):
         if 'HEIGHT' not in state:
             state.HEIGHT = 1.54
         if 'NAME' not in state:
-            state.NAME = 'Your name'
+            state.NAME = ''
 
         def _set_values_cb():
             state.WEIGHT = state['weight']
@@ -23,7 +23,7 @@ with st.expander('Show the code', expanded=False):
             with c1:
                 guage = st.empty()
             with c2:
-                state.NAME = st.text_input('Enter your name (m)', value=state.NAME, key='name')
+                state.NAME = st.text_input('Enter your name', value=state.NAME, key='name')
                 state.WEIGHT = st.number_input('Enter weight (kg)', min_value=50.0, max_value=150.0, value=state.WEIGHT, step=0.5, on_change=_set_values_cb, key='weight')
                 state.HEIGHT = st.number_input('Enter height (m)', min_value=1.0, max_value=2.5, value=state.HEIGHT, step=0.1, on_change=_set_values_cb, key='height')
 
